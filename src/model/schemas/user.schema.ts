@@ -2,12 +2,6 @@ import { IsEmail, IsNotEmpty } from '@nestjs/class-validator';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, HydratedDocument } from 'mongoose';
 
-/* export interface User {
-  email: string;
-  password: string;
-  salt: string;
-} */
-
 export type UserDocument = UserSchema & Document;
 export type HydratedUserDocument = HydratedDocument<UserSchema>;
 
@@ -21,6 +15,10 @@ export class UserSchema {
   @Prop({ required: true })
   @IsNotEmpty()
   password: string;
+
+  @Prop({ required: true })
+  @IsNotEmpty()
+  name: string;
 
   @Prop({ required: true })
   @IsNotEmpty()

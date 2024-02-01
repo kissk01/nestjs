@@ -23,6 +23,8 @@ export class AuthController {
       return { message: 'Invalid credentials' };
     }
     const token = await this.authService.generateJwtToken(user);
+    user.refreshToken = token;
+    await this.userService.saveRefreshToken(user);
     return { token };
   }
 

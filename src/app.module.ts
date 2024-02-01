@@ -9,6 +9,7 @@ import { UserController } from './user/user.controller';
 import { AuthService } from './auth/auth.service';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './jwt/jwt.strategy';
+import { TransactionModule } from './transaction/transaction.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { JwtStrategy } from './jwt/jwt.strategy';
     }),
     MongooseModule.forRoot('mongodb://localhost/nestjs-mongoose-demo'),
     MongooseModule.forFeature([{ name: UserSchema.name, schema: UserModel }]),
+    TransactionModule,
   ],
   controllers: [AppController, AuthController, UserController],
   providers: [AppService, UserService, Logger, AuthService, JwtStrategy],

@@ -71,3 +71,47 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+### Description
+
+Project: Peer-to-Peer Payments System
+Overview:
+Your task is to design a simple version of a Peer-to-Peer (P2P) payment system. The system should allow users to send money to others, request money, and check their balance.
+Core requirements:
+User registration and login
+Create APIs for users to register and log in to the system. Registration should collect necessary information like name, email and password.
+Create a transaction
+Users should be able to create a transaction to send money to another user by specifying the recipient's email (or other unique identifier) and the amount.
+Request money
+Users should be able to request money from another user. The recipient should then be able to accept or reject the request.
+View Balance
+Users should be able to check their current balance. The balance should be updated in real time after every transaction.
+Transaction history
+Users should be able to see a list of all past transactions, showing who the transaction was with, whether money was sent or received, the amount, and the date and time of the transaction.
+Bonus Goals:
+Handle concurrency
+Implement a solution for handling simultaneous transactions. Ensure that a user cannot send money they do not have, even if two transactions that would overdraw the account are initiated at the same time.
+Secure transactions
+Add an additional layer of security where users need to input a 2FA code sent to their email when sending money.
+Automated tests
+Write automated tests for your APIs. These could be unit tests for individual functions or integration tests for the APIs as a whole.
+Notifications
+Implement a system to notify users when they receive money or a money request. This could be as simple as sending an email, or more complex like using a real-time messaging system.
+Pagination
+Implement pagination in the transaction history endpoint.
+Additional Requirements:
+Persistence: You should use Prisma, TypeORM or similar ORM for handling database operations.
+Dockerization: Your application should be dockerized and should run flawlessly using Docker.
+Startup Instructions: Include clear instructions on how to run your application in the repository.
+Swagger Documentation: Use Swagger to document your APIs.
+
+---
+
+Evaluation:
+We will be looking at several aspects of your solution:
+Functionality: Does the system work as described in the requirements?
+Code quality: Is the code well-organized and easy to understand?
+Data modeling: How well does your database schema and data structures fit the problem? Are indices used correctly, etc.?
+Error handling: Does the system handle potential errors gracefully, such as invalid inputs or database issues?
+Concurrency: How well does the system handle multiple simultaneous transactions?
+Please choose either Express.js or Nest.js as the framework to implement this. We look forward to your solution!
