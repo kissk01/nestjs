@@ -1,5 +1,5 @@
 // user.controller.ts
-import { Controller, Get, Logger, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Logger, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { UserService } from './user.service';
 import { UserDocument } from 'src/model/schemas/user.schema';
@@ -21,5 +21,12 @@ export class UserController {
     const allUsers = await this.userService.findAllUsers();
     this.logger.debug(' object for user: ', { user });
     return allUsers;
+  }
+
+  @Get('balance')
+  @UseGuards(AuthGuard('jwt'))
+  async getUserBalance(@AuthUser() user: UserTokenPayloadDto): Promise<number> {
+    const userBalance = await this.userService.getUserBalance(user.email);
+    return userBalance;
   }
 }

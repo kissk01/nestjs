@@ -4,6 +4,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { UserDocument, UserSchema } from 'src/model/schemas/user.schema';
 import * as bcrypt from 'bcryptjs';
+import { CreateUserDto } from 'src/model/dto/create.user.dto';
 
 @Injectable()
 export class UserService {
@@ -17,13 +18,15 @@ export class UserService {
     return this.userModel.findOne({ email }).exec();
   }
 
-  async createUser(email: string, password: string): Promise<UserDocument> {
+  async createUser(payload: CreateUserDto): Promise<UserDocument> {
     const salt = await bcrypt.genSalt();
-    const hashedPassword = await bcrypt.hash(password, salt);
+    const hashedPassword = await bcrypt.hash(payload.password, salt);
     const newUser = new this.userModel({
-      email,
+      email: payload.email,
       password: hashedPassword,
       salt,
+      name: payload.name,
+      balance: payload.balance,
     });
     const savedUser: UserDocument = await newUser.save();
     this.logger.log(' savedUser : ', { savedUser });
@@ -32,6 +35,10 @@ export class UserService {
 
   async saveRefreshToken(user: UserDocument): Promise<UserDocument> {
     const userWithRefreshToken = new this.userModel(user);
+    this.userModel.updateOne(
+      { email: user.email },
+      { refreshToken: user.refreshToken },
+    );
     const saved = await userWithRefreshToken.save();
     return saved;
   }
@@ -45,5 +52,10 @@ export class UserService {
 
   async findAllUsers(): Promise<UserDocument[]> {
     return this.userModel.find().exec();
+  }
+
+  async getUserBalance(email: string): Promise<number> {
+    const user = await this.userModel.findOne({ email }).exec();
+    return user ? user.balance : null;
   }
 }

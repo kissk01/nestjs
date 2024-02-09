@@ -32,10 +32,12 @@ export class AuthController {
   async register(
     @Body() createUserDto: CreateUserDto,
   ): Promise<{ token: string }> {
-    const user = await this.userService.createUser(
-      createUserDto.email,
-      createUserDto.password,
-    );
+    const user = await this.userService.createUser({
+      email: createUserDto.email,
+      password: createUserDto.password,
+      balance: createUserDto.balance,
+      name: createUserDto.name,
+    });
 
     const token = await this.authService.generateJwtToken(user);
     user.refreshToken = token;

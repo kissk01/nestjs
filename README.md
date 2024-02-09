@@ -115,3 +115,24 @@ Data modeling: How well does your database schema and data structures fit the pr
 Error handling: Does the system handle potential errors gracefully, such as invalid inputs or database issues?
 Concurrency: How well does the system handle multiple simultaneous transactions?
 Please choose either Express.js or Nest.js as the framework to implement this. We look forward to your solution!
+
+Create Transaction:
+
+Endpoint: POST /api/transactions
+Description: Allows users to create a transaction to send money to another user by specifying the recipient's email and the amount.
+Request Money:
+
+Endpoint: POST /api/transactions/request
+Description: Allows users to request money from another user by specifying the recipient's email and the amount.
+Accept/Reject Money Request:
+
+Endpoint: PUT /api/transactions/request/:requestId
+Description: Allows the recipient of a money request to accept or reject the request.
+View Balance:
+
+Endpoint: GET /api/balance
+Description: Allows users to check their current balance.
+Transaction History:
+
+Endpoint: GET /api/transactions/history
+Description: Allows users to view a list of all past transactions, showing details such as the transaction partner, type (sent or received), amount, and date/time.

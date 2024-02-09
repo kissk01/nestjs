@@ -1,5 +1,6 @@
 import { IsEmail, IsNotEmpty } from '@nestjs/class-validator';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { IsNumber, IsPositive } from 'class-validator';
 import { Document, HydratedDocument } from 'mongoose';
 
 export type UserDocument = UserSchema & Document;
@@ -26,6 +27,11 @@ export class UserSchema {
 
   @Prop()
   refreshToken: string;
+
+  @Prop({ required: true })
+  @IsNumber()
+  @IsPositive()
+  balance: number;
 }
 
 export const UserModel = SchemaFactory.createForClass(UserSchema);
